@@ -1,0 +1,113 @@
+Visualizing Median GDP Per Capita Over Time
+
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+
+# Summarize the median gdpPercap by year, then save it as by_year
+by_year <- gapminder %>%
+group_by(year) %>%
+summarize(medianGdpPercap = median(gdpPercap))
+
+# Create a line plot showing the change in medianGdpPercap over time
+ggplot(by_year, aes(x = year, y = medianGdpPercap)) + geom_line() + expand_limits(y = 0)
+
+
+Visualizing Median GDP Per Capita by Continent Over Time
+
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+
+# Summarize the median gdpPercap by year & continent, save as by_year_continent
+by_year_continent <- gapminder %>%
+group_by(year, continent) %>%
+summarize(medianGdpPercap = median(gdpPercap))
+
+# Create a line plot showing the change in medianGdpPercap by continent over time
+ggplot(by_year_continent, aes(x = year, y = medianGdpPercap, colour = continent)) + geom_line() + expand_limits(y = 0)
+
+
+Visualizing Median GDP Per Capita by Continent
+
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+
+# Summarize the median gdpPercap by year and continent in 1952
+by_continent <- gapminder %>%
+filter(year == 1952) %>%
+group_by(continent) %>%
+summarize(medianGdpPercap = median(gdpPercap))
+
+# Create a bar plot showing medianGdp by continent
+ggplot(by_continent, aes(x = continent, y = medianGdpPercap)) + geom_col()
+
+
+Visualizing GDP Per Capita by Country in Oceania
+
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+
+# Filter for observations in the Oceania continent in 1952
+oceania_1952 <- gapminder %>%
+filter(year == 1952, continent == 'Oceania')
+
+# Create a bar plot of gdpPercap by country
+ggplot(oceania_1952, aes(x = country, y = gdpPercap)) + geom_col()
+
+
+Visualizing Population
+
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+
+gapminder_1952 <- gapminder %>%
+  filter(year == 1952)
+
+# Create a histogram of population (pop)
+ggplot(gapminder_1952, aes(x = pop)) + geom_histogram()
+
+
+Visualizing Population With x-axis on a Log Scale
+
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+
+gapminder_1952 <- gapminder %>%
+  filter(year == 1952)
+
+# Create a histogram of population (pop), with x on a log scale
+ggplot(gapminder_1952, aes(x = pop)) + geom_histogram() + scale_x_log10()
+
+
+Comparing GDP Per Capita Across Continents
+
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+
+gapminder_1952 <- gapminder %>%
+  filter(year == 1952)
+
+# Create a boxplot comparing gdpPercap among continents
+ggplot(gapminder_1952, aes(x = continent, y = gdpPercap)) + geom_boxplot() + scale_y_log10()
+
+
+Adding a Title to Your Graph
+
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+
+gapminder_1952 <- gapminder %>%
+  filter(year == 1952)
+
+# Add a title to this graph: "Comparing GDP per capita across continents"
+ggplot(gapminder_1952, aes(x = continent, y = gdpPercap)) +
+  geom_boxplot() +
+  scale_y_log10() +
+  ggtitle('Comparing GDP per capita across continents')
