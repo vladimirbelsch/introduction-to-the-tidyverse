@@ -1,0 +1,77 @@
+Loading the gapminder and dplyr Packages
+
+# Load the gapminder package
+library(gapminder)
+
+# Load the dplyr package
+library(dplyr)
+
+# Look at the gapminder dataset
+gapminder
+
+Filtering for One Year
+
+library(gapminder)
+library(dplyr)
+gapminder
+# Filter the gapminder dataset for the year 1957
+gapminder %>% 
+filter(year == 1957)
+
+
+Filtering for One Country and One Year
+
+library(gapminder)
+library(dplyr)
+gapminder
+# Filter for China in 2002
+gapminder %>% 
+filter(country == 'China', year == 2002)
+
+
+Arranging Observations by Life Expectancy
+
+library(gapminder)
+library(dplyr)
+
+# Sort in ascending order of lifeExp
+arrange(gapminder, lifeExp)
+  
+# Sort in descending order of lifeExp
+arrange(gapminder, desc(lifeExp))
+
+
+Filtering and Arranging
+
+library(gapminder)
+library(dplyr)
+
+# Filter for the year 1957, then arrange in descending order of population
+filter(gapminder, year == 1957) %>%
+arrange(desc(pop))
+
+
+Using Mutate to Change or Create a Column
+
+library(gapminder)
+library(dplyr)
+
+# Use mutate to change lifeExp to be in months
+gapminder %>% 
+mutate(lifeExp = lifeExp * 12)
+
+# Use mutate to create a new column called lifeExpMonths
+gapminder %>% 
+mutate(lifeExpMonths = 12 * lifeExp)
+
+
+Combining Filter, Mutate, and Arrange
+
+library(gapminder)
+library(dplyr)
+
+# Filter, mutate, and arrange the gapminder dataset
+gapminder %>% 
+filter(year == 2007) %>%
+mutate(lifeExpMonths = 12 * lifeExp) %>%
+arrange(desc(lifeExpMonths))
